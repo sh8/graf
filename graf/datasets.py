@@ -42,39 +42,54 @@ class ImageDataset(VisionDataset):
         return img
 
 
+class ShapeNet(ImageDataset):
+
+    def __init__(self, *args, **kwargs):
+        super(ShapeNet, self).__init__(*args, **kwargs)
+
+    @staticmethod
+    def _get_files(root_dir):
+        return glob.glob(f'{root_dir}/*.jpg')
+
+
 class Carla(ImageDataset):
+
     def __init__(self, *args, **kwargs):
         super(Carla, self).__init__(*args, **kwargs)
 
 
 class CelebA(ImageDataset):
+
     def __init__(self, *args, **kwargs):
         super(CelebA, self).__init__(*args, **kwargs)
 
 
 class CUB(ImageDataset):
+
     def __init__(self, *args, **kwargs):
         super(CUB, self).__init__(*args, **kwargs)
-        
+
 
 class Cats(ImageDataset):
+
     def __init__(self, *args, **kwargs):
-      super(Cats, self).__init__(*args, **kwargs)
-    
+        super(Cats, self).__init__(*args, **kwargs)
+
     @staticmethod
     def _get_files(root_dir):
-      return glob.glob(f'{root_dir}/CAT_*/*.jpg')
+        return glob.glob(f'{root_dir}/CAT_*/*.jpg')
 
 
 class CelebAHQ(ImageDataset):
+
     def __init__(self, *args, **kwargs):
         super(CelebAHQ, self).__init__(*args, **kwargs)
-    
+
     def _get_files(self, root):
         return glob.glob(f'{root}/*.npy')
-    
+
     def __getitem__(self, idx):
-        img = np.load(self.filenames[idx]).squeeze(0).transpose(1,2,0)
+        img = np.load(self.filenames[idx]).squeeze(0).transpose(1, 2, 0)
         if img.dtype == np.uint8:
             pass
         elif img.dtype == np.float32:
@@ -84,5 +99,5 @@ class CelebAHQ(ImageDataset):
         img = Image.fromarray(img).convert('RGB')
         if self.transform is not None:
             img = self.transform(img)
-        
+
         return img

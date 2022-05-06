@@ -1,0 +1,12 @@
+expname: shapenet_chairs_128
+data:
+  imsize: 128
+  datadir: data/shapenet/chairs
+  type: shapenet
+  radius: 10.
+  near: 7.5
+  far: 12.5
+  fov: 90.0
+  vmin: 0.25 # 60 deg
+  vmax: 0.75 # 120 deg
+
